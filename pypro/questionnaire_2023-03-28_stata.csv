@@ -1,0 +1,3 @@
+id_in_session,code,label,_is_bot,_index_in_pages,_max_page_index,_current_app_name,_current_page_name,time_started_utc,visited,mturk_worker_id,mturk_assignment_id,payoff,id_in_group,role,player_payoff,school,age,gender,grade,major,suggest,attention,id_in_subsession,round_number,session_code,session_label,mturk_HITId,mturk_HITGroupId,comment,is_demo
+1,k5lp75zg,103,0,32,32,questionnaire,Results,2023-03-28 04:00:20.571671,1,,,640.0,1,,0.0,浙江大学,18,1,2,0,,1234,1,1,k9iugz2q,,,,,0
+2,x4bg3yf1,101,0,32,32,questionnaire,Results,2023-03-28 04:00:20.585037,1,,,380.0,2,,0.0,浙江大学,18,0,1,1,,1234,1,1,k9iugz2q,,,,,0

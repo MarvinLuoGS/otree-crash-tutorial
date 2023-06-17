@@ -1,0 +1,11 @@
+﻿participant.id_in_session,participant.code,participant.label,participant._is_bot,participant._index_in_pages,participant._max_page_index,participant._current_app_name,participant._current_page_name,participant.time_started_utc,participant.visited,participant.mturk_worker_id,participant.mturk_assignment_id,participant.payoff,player.id_in_group,player.role,player.payoff,group.id_in_subsession,group.sent_amount,group.sent_back_amount,subsession.round_number,session.code,session.label,session.mturk_HITId,session.mturk_HITGroupId,session.comment,session.is_demo
+1,k5lp75zg,103,0,32,32,questionnaire,Results,2023-03-28 04:00:20.571671,1,,,640.0,1,,120.0,1,50.0,70.0,1,k9iugz2q,,,,,0
+2,x4bg3yf1,101,0,32,32,questionnaire,Results,2023-03-28 04:00:20.585037,1,,,380.0,2,,80.0,1,50.0,70.0,1,k9iugz2q,,,,,0
+1,k5lp75zg,103,0,32,32,questionnaire,Results,2023-03-28 04:00:20.571671,1,,,640.0,1,,120.0,1,60.0,80.0,2,k9iugz2q,,,,,0
+2,x4bg3yf1,101,0,32,32,questionnaire,Results,2023-03-28 04:00:20.585037,1,,,380.0,2,,100.0,1,60.0,80.0,2,k9iugz2q,,,,,0
+1,k5lp75zg,103,0,32,32,questionnaire,Results,2023-03-28 04:00:20.571671,1,,,640.0,1,,130.0,1,70.0,100.0,3,k9iugz2q,,,,,0
+2,x4bg3yf1,101,0,32,32,questionnaire,Results,2023-03-28 04:00:20.585037,1,,,380.0,2,,110.0,1,70.0,100.0,3,k9iugz2q,,,,,0
+1,k5lp75zg,103,0,32,32,questionnaire,Results,2023-03-28 04:00:20.571671,1,,,640.0,1,,170.0,1,80.0,150.0,4,k9iugz2q,,,,,0
+2,x4bg3yf1,101,0,32,32,questionnaire,Results,2023-03-28 04:00:20.585037,1,,,380.0,2,,90.0,1,80.0,150.0,4,k9iugz2q,,,,,0
+1,k5lp75zg,103,0,32,32,questionnaire,Results,2023-03-28 04:00:20.571671,1,,,640.0,1,,100.0,1,0.0,0.0,5,k9iugz2q,,,,,0
+2,x4bg3yf1,101,0,32,32,questionnaire,Results,2023-03-28 04:00:20.585037,1,,,380.0,2,,0.0,1,0.0,0.0,5,k9iugz2q,,,,,0
