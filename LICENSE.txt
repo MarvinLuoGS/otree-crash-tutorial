@@ -3,3 +3,10 @@
 此文档受版权法保护。未经版权所有者明确许可，禁止复制、分发、修改或以任何形式进行商业利用。
 
 如需获取该文档的许可或探讨使用该文档的方式，请联系 marvinluost@gmail.com。
+
+Copyright © Gansong Luo.
+All rights reserved.
+
+This document is protected by copyright law. No part of this document may be reproduced, distributed, modified, or used in any form or by any means without the explicit permission of the copyright owner.
+
+For permissions or inquiries on the use of this document, please contact marvinluost@gmail.com.
