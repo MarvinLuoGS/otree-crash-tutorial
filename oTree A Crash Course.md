@@ -3,7 +3,8 @@
 罗干松
 github:https://github.com/MarvinLuoGS
 
-This Version:20230701
+This Version:20240310
+Version: 1.1
 
 [TOC]
 
@@ -1105,7 +1106,7 @@ oTree是一个开源的Python框架，用于在实验经济学中设计、开发
   - participant_payoff_plus_partipation_fee()是内置的计算最终现金收益的方法，可以用于前端的输出展示等
 - 在处理收益上，如果需要对不同实验任务采用不同的收益率，那么可以在不同实验中计算payoff的时候写入不同的比例，而不使用统一的real_world_currency_per_point（设置为1并把USE_POINTS设定为True即可，所有比例换算都手动完成），有的时候甚至不一定使用CurrencyField而使用IntegerField或FloatField，也即所有的运算都通过自定的函数进行，最终只需记得将结果存入payoff
 
-### 2. Timeout的设定
+### 2. Timer的设定
 
 - 默认中页面没有结束的限制时间，只有在提交或达成其他设定条件时才会结束当前页面进入下一页面
 
@@ -1189,7 +1190,15 @@ oTree是一个开源的Python框架，用于在实验经济学中设计、开发
 
   - ```html
     <p id="timer_posi">剩余时间：</p>
+    <button class="otree-btn-next btn btn-primary" id="btn" style='float:left'>下一页</button>
     <script>
+    //点击按键提交当前页面后，清楚原来存储的countDown，这样在多轮实验需要复用这一页面时，在新一轮中倒计时会从头开始
+    //如果不清楚countDown，在后面的轮此重新进入这一页面时，由于已经记录了countDown，会认为倒计时已经结束，从而不会重新开始倒计时
+    const myButton = document.getElementById('btn');
+    myButton.addEventListener('click', removeItem);
+    function removeItem(){
+        sessionStorage.removeItem('countDown');
+    }
     //自己设定的倒计时，倒计时结束不会提交当前页面
     $(document).ready(function(){
         window.onload = function(){
