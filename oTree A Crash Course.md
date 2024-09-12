@@ -3,8 +3,8 @@
 罗干松
 github:https://github.com/MarvinLuoGS
 
-This Version:20240310
-Version: 1.1
+This Version:20240912
+Version: 1.2
 
 [TOC]
 
@@ -1106,7 +1106,27 @@ oTree是一个开源的Python框架，用于在实验经济学中设计、开发
   - participant_payoff_plus_partipation_fee()是内置的计算最终现金收益的方法，可以用于前端的输出展示等
 - 在处理收益上，如果需要对不同实验任务采用不同的收益率，那么可以在不同实验中计算payoff的时候写入不同的比例，而不使用统一的real_world_currency_per_point（设置为1并把USE_POINTS设定为True即可，所有比例换算都手动完成），有的时候甚至不一定使用CurrencyField而使用IntegerField或FloatField，也即所有的运算都通过自定的函数进行，最终只需记得将结果存入payoff
 
-### 2. Timer的设定
+### 2. 自定义数据输出格式
+
+- otree的数据导出默认会将所有内置的字段以及自定义的字段统一导出，另外也可以自行指定需要输出的字段（变量）
+
+- 在实验app的\_\_init\_\_.py文件中，定义如下的custom_export函数（以上面处理点数与收益的currency程序为例）：
+
+  ```python
+  def custom_export(players):
+      # 定义表头
+      yield ['session_code', ' participant_code', 'id_in_group', 'earned', 'payoff']
+      for p in players:
+          participant = p.participant
+          session = p.session
+          # 定义输出的数据对应字段
+          yield [session.code, participant.code, p.id_in_group, p.earned, p.payoff]
+  ```
+
+- 这个函数定义了需要输出的字段以及它们在数据文件中相应的表头，定义完成后otree后台会自动执行，无需调用，针对不同的app可以定义和导出不同数据字段
+- 具体的数据下载操作参考后续[“数据下载与文件类型”](#（二）数据下载与文件类型)
+
+### 3. Timer的设定
 
 - 默认中页面没有结束的限制时间，只有在提交或达成其他设定条件时才会结束当前页面进入下一页面
 
@@ -1262,7 +1282,7 @@ oTree是一个开源的Python框架，用于在实验经济学中设计、开发
     </script>
     ```
 
-### 3. round和app之间的数据传递
+### 4. round和app之间的数据传递
 
 - 在oTree中每一轮的subsession、group和player对象都是独立的，在第一轮输入的数据并不会传递至第二轮
 
@@ -1379,7 +1399,7 @@ oTree是一个开源的Python框架，用于在实验经济学中设计、开发
     PARTICIPANT_FIELDS = ['pass_number']
     ```
 
-### 4. group和role的设定
+### 5. group和role的设定
 
 - 在实验中不可避免地会遇到分组匹配和角色分配的问题，比如独裁者博弈、信任博弈等，如何在oTree中进行随机的分组和角色分配？
 
@@ -1753,7 +1773,15 @@ oTree是一个开源的Python框架，用于在实验经济学中设计、开发
      DEBUG = False #改为True即开启debug mode
      ```
 
-3. **（可选）**实验后台登录密码
+3. 改变内置界面的语言
+
+   - 内置的等待页面等界面上原来默认显示的是英文语句，可以在settings.py文件中修改语言，即可显示中文：
+
+     ```python
+     LANGUAGE_CODE = 'zh-hans'
+     ```
+
+4. **（可选）**实验后台登录密码
 
    - otree启动后在同一网络环境中的设备都可以输入相应的服务器ip连接后台，添加后登录密码后在连接后台后必须输入密码才能使用后台的功能，但这不是必须要设置的
 
@@ -1821,13 +1849,15 @@ oTree是一个开源的Python框架，用于在实验经济学中设计、开发
 
 4. 被试端操作
 
-   - 如果使用房间网址连接，首先进入如下输入页面，需要手动输入label，这两个内置页面需要修改才能显示为中文：在settings.py中的LANGUAGE_CODE变量赋值“zh-hans”
-   
+   - 如果使用房间网址连接，首先进入如下输入页面，需要手动输入label，
+
      <img src="pic/label_input.jpg" alt="label_input" style="zoom:50%;" />
-   
+
    - 输入label后或直接使用专用链接，此时实验员没有点击Create的话则进入如下的等待界面
-   
+
      <img src="pic/label_wait.jpg" alt="label_wait" style="zoom:50%;" />
+
+   - 这两个内置页面默认为英文，需要修改才能显示为中文：在settings.py中的LANGUAGE_CODE变量赋值“zh-hans”
 
 5. 正式启动
 
@@ -1919,6 +1949,14 @@ oTree是一个开源的Python框架，用于在实验经济学中设计、开发
 
   <img src="pic/data_download.png" alt="data_download" style="zoom:67%;" />
 
+  - 如果自定义了某个app的数据输出，可以在Data页看到该app的自定义输出选择（参考下图例子），下载该自定义输出格式即可导出：
+  
+    <img src="pic\custom_data_export.jpg" style="zoom:50%;" />
+  
+    导出的csv文件：
+  
+    ![](pic\custom_data_export_csv.jpg)
+  
   - All apps的文件中，每个参加者只占一行，所有app中的数据都水平地拼接在一起，同一个app有多个轮次的也是水平地拼接在一起
   
     ![data_all_apps](pic/data_all_apps.png)
@@ -1928,9 +1966,9 @@ oTree是一个开源的Python框架，用于在实验经济学中设计、开发
     ![data_per_app](pic/data_per_app.png)
   
   - Page times文件中记录了每个参加者离开某一页面进入下一页面的时刻（时间戳），这个时刻是相对1970年1月1日这个计算机时间原点经过的秒数，相邻的两个时刻相减就得到在该页面上花费的时间
-    
+  
     ![data_page_time](pic/data_page_time.png)
-    
+  
     - 比如在A时刻离开Introduction页进入第一次决策页，B时刻完成第一次决策进入等待页，B-A就得到第一次决策花费的时间
     - **如果在页面上花费的时间很重要，不建议使用这个Page times文件**。**建议是在实验中使用python的time包等处理时间的包记录时间在某个字段中**，以保存在数据CSV文件里方便分析，处理时间的方式也是获取前后两个时间戳并相减。
     - 如果在页面上停留的时间并不重要，这个文件意义不大。所以无论怎样，这个文件都不是很重要
