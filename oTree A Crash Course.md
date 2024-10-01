@@ -1725,12 +1725,15 @@ oTree是一个开源的Python框架，用于在实验经济学中设计、开发
 
      ```python
      def creating_session(subsession):
-         labels = [101,103,105,107]
+        file_path = '_rooms/Econ.txt'
+        with open(file_path,'r') as file:
+          label = file.readlines()
+          labels = [int(line.strip()) for line in label]
          for p,label in zip(subsession.get_players(),labels):
              p.participant.label = label
      ```
 
-     这一段代码需要添加在实验程序运行的**第一个app的\_\_init\_\_.py**文件中，不用放在某一个类里面。
+     这一段代码需要添加在实验程序运行的**第一个app的\_\_init\_\_.py**文件中，不用放在某一个类里面。这一段代码首先读取了存储有label的txt文件，该文件内保存有101、103、105、107四个label，将其读取并整理为一个列表，最后将这个列表与subsession中的player一一对应。这样在后台Monitor中，被试的label就会按照我们指定的顺序排列。
 
    - **（可选）**在进行多场次实验的时候，还可以在creating_session中添加的内容是session.label。这是因为，oTree启动每一个session时会随机生成一串code作为session.code，这个值可以区分不同场次，但是不够直观，而session自带了label字段。因此可以在creating_session中指定session.label，这样下载的数据中就带有直观的label作为区分。这里获取不同场次开始实验的时间并格式化，作为session的label
 
@@ -1769,6 +1772,8 @@ oTree是一个开源的Python框架，用于在实验经济学中设计、开发
    - 登录密码可以在环境变量中添加OTREE_ADMIN_PASSWORD设置，变量的值即为登录密码
 
    - 还可以设置程序的权限等级：在环境变量中添加OTREE_AUTH_LEVEL，正式实验可设置为STUDY，网络公开供其他人参考的程序样例一般会设置值为DEMO
+
+   - 另外一个有关的环境变量是OTREE_PRODUCTION，这是另一种控制debug模式的开关，如果设置为True（1），则关闭debug mode，如果设置为False（0），则开启debug mode
 
 ## （三）启动实验
 
